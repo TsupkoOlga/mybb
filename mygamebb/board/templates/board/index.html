@@ -1,0 +1,14 @@
+{% extends 'board/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<ul>
+    {% for c in cats %}
+        {% if c.pk == cat_selected %}
+            <li class="selected">{{ c }}</li>
+        {% else %}
+            <li><a href="{{ c.get_absolute_url}}">{{ c }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
