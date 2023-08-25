@@ -27,9 +27,9 @@ class Bulletin(models.Model):
     title = models.CharField(max_length=63)
     # time_in = models.DateTimeField(auto_now_add = True)
     content = models.TextField(default="Место для текста")
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    cat = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     # def preview(self):
        # if len(self.content) < 125:

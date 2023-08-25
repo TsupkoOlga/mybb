@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render
 from .models import *
 
@@ -9,10 +9,12 @@ menu = [{'title': 'На главную', 'url_name': 'home'},
 ]
 
 def index(request):
+    bulletins = Bulletin.objects.all()
     cats = Category.objects.all()
-    context = {'cats': cats,
+    context = {'bulletins': bulletins,
+               'cats': cats,
                'menu': menu,
-               'title': 'Категории:',
+               'title': 'Главная страница',
                'cat_selected': 0
     }
     return render(request, 'board/index.html', context=context)
@@ -28,7 +30,18 @@ def login(request):
 
 
 def show_category(request, cat_id):
-    return HttpResponse(f'Статьи в категории {cat_id}')
+    cats = Category.objects.all()
+    bulletins = Bulletin.objects.filter(cat_id=cat_id)
+    if len(bulletins) == 0:
+        raise Http404()
+
+    context = {'bulletins': bulletins,
+               'cats': cats,
+               'menu': menu,
+               'title': 'Объявления по категориям',
+               'cat_selected': cat_id
+               }
+    return render(request, 'board/index.html', context=context)
 
 def show_bulletin(request, bul_id):
     return HttpResponse(f'Отображение объявления с id = {bul_id}')

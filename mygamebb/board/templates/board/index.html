@@ -1,14 +1,18 @@
 {% extends 'board/base.html' %}
 
 {% block content %}
-<h1>{{ title }}</h1>
-<ul>
-    {% for c in cats %}
-        {% if c.pk == cat_selected %}
-            <li class="selected">{{ c }}</li>
-        {% else %}
-            <li><a href="{{ c.get_absolute_url}}">{{ c }}</a></li>
-        {% endif %}
-    {% endfor %}
+<ul class="list-articles">
+	{% for b in bulletins %}
+	    <li><div class="article-panel">
+	            <p class="first">Категория: {{b.cat}}</p>
+		    </div>
+			<h2>{{b.title}}</h2>
+	        {% autoescape on %}
+	        {{b.content|linebreaks|truncatewords:50}}
+	        {% endautoescape %}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="{{ b.get_absolute_url }}">Читать объявление</a></p>
+		</li>
+	{% endfor %}
 </ul>
 {% endblock %}
