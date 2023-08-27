@@ -6,6 +6,9 @@
 	    <li><div class="article-panel">
 	            <p class="first">Категория: {{b.cat}}</p>
 		    </div>
+			{% if b.photo %}
+			    <p><img class="img-article-left-thumb" src="{{b.photo.url}}"> </p>
+			{% endif %}
 			<h2>{{b.title}}</h2>
 	        {% autoescape on %}
 	        {{b.content|linebreaks|truncatewords:50}}

@@ -13,7 +13,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=63, unique=True)
+    name = models.CharField(max_length=63, unique=True, verbose_name='Имя категории')
 
     def __str__(self):
         return self.name.title()
@@ -21,15 +21,18 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category', kwargs={'cat_id': self.pk})
 
-
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ['id']
 
 class Bulletin(models.Model):
-    title = models.CharField(max_length=63)
-    # time_in = models.DateTimeField(auto_now_add = True)
-    content = models.TextField(default="Место для текста")
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    cat = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=63, verbose_name='Заголовок')
+    # time_in = models.DateTimeField(auto_now_add = True, verbose_name='Заголовок')
+    content = models.TextField(default='Место для текста', verbose_name='Текст объявления')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True, verbose_name='Фото')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    cat = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
 
     # def preview(self):
        # if len(self.content) < 125:
@@ -43,6 +46,11 @@ class Bulletin(models.Model):
 
     def get_absolute_url(self):
         return reverse('bulletin', kwargs={'bul_id': self.pk})
+
+    class Meta:
+        verbose_name = 'Объявление'
+        verbose_name_plural = 'Объявления'
+        ordering = ['id']
     #def __str__(self):
         #return f'{self.title.title()}: {self.content[:20]}'
 
@@ -54,8 +62,13 @@ class Bulletin(models.Model):
     # category = models.ForeignKey(Category, on_delete = models.CASCADE)
 
 class Comment(models.Model):
-    # time_in = models.DateTimeField(auto_now_add=True)
-    reply = models.CharField(max_length=255)
-    bulletin = models.ForeignKey(Bulletin, on_delete=models.CASCADE, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    is_accept = models.BooleanField(default=False)
+    time_in = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    reply = models.CharField(max_length=255, verbose_name='Отклик')
+    bulletin = models.ForeignKey(Bulletin, on_delete=models.CASCADE, verbose_name='Объявление')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    is_accept = models.BooleanField(default=False, verbose_name='Принят')
+
+    class Meta:
+        verbose_name = 'Отклик'
+        verbose_name_plural = 'Отклики'
+        ordering = ['id']

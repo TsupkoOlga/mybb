@@ -32,6 +32,7 @@ def login(request):
 def show_category(request, cat_id):
     cats = Category.objects.all()
     bulletins = Bulletin.objects.filter(cat_id=cat_id)
+
     if len(bulletins) == 0:
         raise Http404()
 
