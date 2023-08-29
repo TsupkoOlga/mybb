@@ -1,5 +1,5 @@
 {% extends 'board/base.html' %}
-
+{% load board_tags %}
 
 {% block content %}
 <h1>{{bulletin.title}}</h1>
@@ -10,7 +10,11 @@
 
 {{bulletin.content|linebreaks}}
 
-
+<h3>Отклики</h3>
+{% get_comments filter=bulletin.id as comments %}
+{% for c in comments %}
+	<li class="selected">{{c.reply}}</li>
+{% endfor %}
 
 {% endblock %}
 
