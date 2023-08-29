@@ -1,0 +1,17 @@
+{% extends 'board/base.html' %}
+
+
+{% block content %}
+<h1>{{bulletin.title}}</h1>
+
+{% if post.photo %}
+<p><img class="img-article-left" src="{{bulletin.photo.url}}"></p>
+{% endif %}
+
+{{bulletin.content|linebreaks}}
+
+
+
+{% endblock %}
+
+

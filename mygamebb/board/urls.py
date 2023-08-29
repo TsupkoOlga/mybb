@@ -2,10 +2,10 @@ from django.urls import path
 from board.views import *
 
 urlpatterns = [
-    path('', index, name='home'),
+    path('', BulletinList.as_view(), name='home'),
     path('about/', about, name='about'),
     path('addbulletin/', addbulletin, name='add_bulletin'),
     path('login/', login, name='login'),
-    path('bulletin/<int:bul_id>/', show_bulletin, name='bulletin'),
-    path('category/<int:cat_id>/', show_category, name='category')
+    path('bulletin/<int:pk>/', ShowBulletin.as_view(), name='bulletin'),
+    path('category/<int:cat_id>/', CategoryList.as_view(), name='category')
 ]

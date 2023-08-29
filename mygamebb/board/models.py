@@ -45,7 +45,7 @@ class Bulletin(models.Model):
         return self.title.title()
 
     def get_absolute_url(self):
-        return reverse('bulletin', kwargs={'bul_id': self.pk})
+        return reverse('bulletin', args=[str(self.id)])
 
     class Meta:
         verbose_name = 'Объявление'

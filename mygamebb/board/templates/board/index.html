@@ -12,9 +12,10 @@
 			<h2>{{b.title}}</h2>
 	        {% autoescape on %}
 	        {{b.content|linebreaks|truncatewords:50}}
+			<p class="link-read-post"><a href="{{ b.get_absolute_url }}">Читать объявление</a></p>
 	        {% endautoescape %}
 			<div class="clear"></div>
-			<p class="link-read-post"><a href="{{ b.get_absolute_url }}">Читать объявление</a></p>
+
 		</li>
 	{% endfor %}
 </ul>
