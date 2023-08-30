@@ -1,27 +1,24 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
 from .models import *
+from .utils import *
 
-menu = [{'title': 'На главную', 'url_name': 'home'},
-        {'title': 'О сайте', 'url_name': 'about'},
-        {'title': 'Добавить объявление', 'url_name': 'add_bulletin'},
-        {'title': 'Войти', 'url_name': 'login'}
-]
 
-class BulletinList(ListView):
+class BulletinList(DataMixin, ListView):
     model = Bulletin
     template_name = 'board/index.html'
     context_object_name = 'bulletins'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        context['title'] = 'Главная страница'
-        context['cat_selected'] = 0
-        return context
+        c_def = self.get_user_context(title="Главная страница")
+        return dict(list(context.items()) + list(c_def.items()))
+
 
     def get_queryset(self):
         return Bulletin.objects.all()
@@ -41,20 +38,33 @@ class BulletinList(ListView):
 def about(request):
     return render(request, 'board/about.html', {'menu': menu, 'title': 'О сайте'})
 
-def addbulletin(request):
-    if request.method == 'POST':
-        form = AddBulletinForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = AddBulletinForm()
-    return render(request, 'board/addbulletin.html', {'form': form, 'menu': menu, 'title': 'Добавление объявления'})
+class AddBulletin(LoginRequiredMixin, DataMixin, CreateView):
+    form_class = AddBulletinForm
+    template_name = 'board/addbulletin.html'
+    # success_url = reverse_lazy('home')
+    login_url = reverse_lazy('login')
+    raise_exception = True
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Добавление объявления")
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+# def addbulletin(request):
+#     if request.method == 'POST':
+#         form = AddBulletinForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('home')
+#     else:
+#         form = AddBulletinForm()
+#     return render(request, 'board/addbulletin.html', {'form': form, 'menu': menu, 'title': 'Добавление объявления'})
 
 def login(request):
     return HttpResponse('Авторизация')
 
-class CategoryList(ListView):
+class CategoryList(DataMixin, ListView):
     model = Bulletin
     template_name = 'board/index.html'
     context_object_name = 'bulletins'
@@ -65,10 +75,9 @@ class CategoryList(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Категория - ' + str(context['bulletins'][0].cat)
-        context['menu'] = menu
-        context['cat_selected'] = context['bulletins'][0].cat_id
-        return context
+        c_def = self.get_user_context(title='Категория - ' + str(context['bulletins'][0].cat),
+                                      cat_selected=context['bulletins'][0].cat_id)
+        return dict(list(context.items()) + list(c_def.items()))
 
 
 # def show_category(request, cat_id):
@@ -95,17 +104,15 @@ class CategoryList(ListView):
 #                }
 #     return render(request, 'board/bulletin.html', context=context)
 
-class ShowBulletin(DetailView):
+class ShowBulletin(DataMixin, DetailView):
     model = Bulletin
     template_name = 'board/bulletin.html'
-    # pk_url_kwarg = 'bulletin.id'
     context_object_name = 'bulletin'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = context['bulletin']
-        context['menu'] = menu
-        return context
+        c_def = self.get_user_context(title=context['bulletin'])
+        return dict(list(context.items()) + list(c_def.items()))
 
 
 
