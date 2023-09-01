@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="654f3c45-9570-4489-a24a-bb54aa8a1331" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/static/board/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/static/board/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/templates/board/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/db.sqlite3" afterDir="false" />
     </list>
@@ -16,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>

@@ -5,10 +5,10 @@ from .models import *
 menu = [{'title': 'На главную', 'url_name': 'home'},
         {'title': 'О сайте', 'url_name': 'about'},
         {'title': 'Добавить объявление', 'url_name': 'add_bulletin'},
-        {'title': 'Войти', 'url_name': 'login'}
 ]
 
 class DataMixin:
+    paginate_by = 2
     def get_user_context(self, **kwargs):
         context = kwargs
         cats = Category.objects.annotate(Count('bulletin'))
