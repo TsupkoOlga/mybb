@@ -11,11 +11,11 @@ class AddBulletinForm(forms.ModelForm):
 
     class Meta:
         model = Bulletin
-        fields = ['title', 'content', 'photo', 'cat', 'user']
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-input'}),
-            'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-        }
+        fields = ['title', 'content', 'cat', 'user']
+        # widgets = {
+        #     'title': forms.TextInput(attrs={'class': 'form-input'}),
+        #     'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+        # }
 
     def clean_title(self):
         title = self.cleaned_data['title']

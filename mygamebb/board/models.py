@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -29,8 +30,7 @@ class Category(models.Model):
 class Bulletin(models.Model):
     title = models.CharField(max_length=63, verbose_name='Заголовок')
     # time_in = models.DateTimeField(auto_now_add = True, verbose_name='Заголовок')
-    content = models.TextField(default='Место для текста', verbose_name='Текст объявления')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True, verbose_name='Фото')
+    content = RichTextField(verbose_name='Текст объявления')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
     cat = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
 
@@ -50,7 +50,7 @@ class Bulletin(models.Model):
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
-        ordering = ['id']
+        ordering = ['-id']
     #def __str__(self):
         #return f'{self.title.title()}: {self.content[:20]}'
 

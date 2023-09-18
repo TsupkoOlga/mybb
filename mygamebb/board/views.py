@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import *
@@ -28,22 +28,12 @@ class BulletinList(DataMixin, ListView):
         return Bulletin.objects.all()
 
 
-# def index(request):
-#     bulletins = Bulletin.objects.all()
-#     cats = Category.objects.all()
-#     context = {'bulletins': bulletins,
-#                'cats': cats,
-#                'menu': menu,
-#                'title': 'Главная страница',
-#                'cat_selected': 0
-#     }
-#     return render(request, 'board/index.html', context=context)
-
 def about(request):
     return render(request, 'board/about.html', {'menu': menu, 'title': 'О сайте'})
 
 class AddBulletin(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddBulletinForm
+    model = Bulletin
     template_name = 'board/addbulletin.html'
     # success_url = reverse_lazy('home')
     login_url = reverse_lazy('login')
@@ -52,6 +42,19 @@ class AddBulletin(LoginRequiredMixin, DataMixin, CreateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title="Добавление объявления")
+        return dict(list(context.items()) + list(c_def.items()))
+
+class EditBulletin(LoginRequiredMixin, DataMixin, UpdateView):
+    form_class = AddBulletinForm
+    model = Bulletin
+    template_name = 'board/addbulletin.html'
+    # success_url = reverse_lazy('home')
+    login_url = reverse_lazy('login')
+    raise_exception = True
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Редактирование объявления")
         return dict(list(context.items()) + list(c_def.items()))
 
 
@@ -117,8 +120,6 @@ class ShowBulletin(DataMixin, DetailView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['bulletin'])
         return dict(list(context.items()) + list(c_def.items()))
-
-
 
 
 def pageNotFound(request, exception):
