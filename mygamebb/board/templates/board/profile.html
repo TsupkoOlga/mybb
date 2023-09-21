@@ -1,0 +1,23 @@
+{% extends 'board/base.html' %}
+
+{% block content %}
+<ul class="list-articles">
+	<form action="" method="get">
+        {{ filterset.form.as_p }}
+        <input type="submit" value="Найти" />
+   </form>
+	{% for c in comments %}
+	    <li>
+
+			{{c.reply}}
+			{% if not c.is_accept %}
+			    <p class="link-read-post"><a href="reply/confirm/{{ c.id }}">Принять отклик</a></p>
+                <p class="link-read-post"><a href="reply/delete/{{ c.id }}">Удалить отклик</a></p>
+			{% endif %}
+
+			<div class="clear"></div>
+
+		</li>
+	{% endfor %}
+</ul>
+{% endblock %}

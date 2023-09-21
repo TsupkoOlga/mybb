@@ -5,9 +5,10 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from .filters import CommentFilter
 from .forms import *
 from .models import *
 from .utils import *
@@ -71,6 +72,15 @@ class EditBulletin(LoginRequiredMixin, DataMixin, UpdateView):
 # def login(request):
 #     return HttpResponse('Авторизация')
 
+class AddReply(LoginRequiredMixin, DataMixin, CreateView):
+    form_class = AddReplyForm
+    model = Comment
+    template_name = 'board/addreply.html'
+    # success_url = reverse_lazy('home')
+    login_url = reverse_lazy('login')
+    raise_exception = True
+
+
 class CategoryList(DataMixin, ListView):
     model = Bulletin
     template_name = 'board/index.html'
@@ -85,6 +95,31 @@ class CategoryList(DataMixin, ListView):
         c_def = self.get_user_context(title='Категория - ' + str(context['bulletins'][0].cat),
                                       cat_selected=context['bulletins'][0].cat_id)
         return dict(list(context.items()) + list(c_def.items()))
+
+class ProfileList(DataMixin, ListView):
+    model = Comment
+    template_name = 'board/profile.html'
+    context_object_name = 'comments'
+    # 0allow_empty = False
+
+    # def get_queryset(self):
+    #     return Comment.objects.filter(bulletin__user=self.request.user.id)
+
+    def get_queryset(self):
+        queryset = Comment.objects.filter(bulletin__user=self.request.user.id)
+        self.filterset = CommentFilter(self.request.GET, queryset)
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filterset'] = self.filterset
+        return context
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     c_def = self.get_user_context(title='Мои объявления')
+    #
+    #     return dict(list(context.items()) + list(c_def.items()))
 
 
 # def show_category(request, cat_id):
@@ -156,3 +191,15 @@ def pageNotFound(request, exception):
 # def logout_user(request):
 #     logout(request)
 #     return redirect('login')
+
+class CommentConfirm(UpdateView):
+    form_class = ConfirmCommentForm
+    model = Comment
+    template_name = 'board/comment_confirm.html'
+    success_url = reverse_lazy('profile')
+
+class CommentDelete(DeleteView):
+    model = Comment
+    template_name = 'board/comment_delete.html'
+    success_url = reverse_lazy('profile')
+

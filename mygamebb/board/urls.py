@@ -10,5 +10,10 @@ urlpatterns = [
     # path('logout/', logout_user, name='logout'),
     # path('register/', RegisterUser.as_view(), name='register'),
     path('bulletin/<int:pk>/', ShowBulletin.as_view(), name='bulletin'),
-    path('category/<int:cat_id>/', CategoryList.as_view(), name='category')
+    path('bulletin/<int:pk>/leavereply/', AddReply.as_view(), name='add_reply'),
+    path('category/<int:cat_id>/', CategoryList.as_view(), name='category'),
+    path('accounts/profile/', ProfileList.as_view(), name='profile'),
+    path('accounts/profile/reply/confirm/<int:pk>', CommentConfirm.as_view(), name='confirm'),
+    path('accounts/profile/reply/delete/<int:pk>', CommentDelete.as_view(), name='comment_delete'),
+
 ]

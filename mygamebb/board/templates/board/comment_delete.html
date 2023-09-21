@@ -1,0 +1,10 @@
+{% extends 'board/base.html' %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Удаляем отклик?</p>
+    <input type="submit" value="Да" />
+</form>
+{% endblock content %}

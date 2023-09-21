@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="654f3c45-9570-4489-a24a-bb54aa8a1331" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mybb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mybb.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/templates/board/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/bulletin.html" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/templates/board/bulletin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/templates/board/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/mygamebb/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/mygamebb/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/mygamebb/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/mygamebb/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>

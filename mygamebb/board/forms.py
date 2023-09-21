@@ -24,6 +24,36 @@ class AddBulletinForm(forms.ModelForm):
 
         return title
 
+class AddReplyForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['reply'].empty_label = "Категория не выбрана"
+
+    class Meta:
+        model = Comment
+        fields = ['reply', 'user', 'bulletin']
+        # widgets = {
+        #     'title': forms.TextInput(attrs={'class': 'form-input'}),
+        #     'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+        # }
+
+    def clean_reply(self):
+        reply = self.cleaned_data['reply']
+        if len(reply) > 255:
+            raise ValidationError('Длина превышает 255 символов')
+
+        return reply
+
+class ConfirmCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['is_accept']
+        # widgets = {
+        #     'title': forms.TextInput(attrs={'class': 'form-input'}),
+        #     'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+        # }
+
+
 # class RegisterUserForm(UserCreationForm):
 #     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
 #     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
