@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 
 from .models import *
@@ -12,10 +11,7 @@ class AddBulletinForm(forms.ModelForm):
     class Meta:
         model = Bulletin
         fields = ['title', 'content', 'cat',  'user']
-        # widgets = {
-        #     'title': forms.TextInput(attrs={'class': 'form-input'}),
-        #     'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-        # }
+
 
     def clean_title(self):
         title = self.cleaned_data['title']
@@ -32,10 +28,7 @@ class AddReplyForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['reply', 'user', 'bulletin']
-        # widgets = {
-        #     'title': forms.TextInput(attrs={'class': 'form-input'}),
-        #     'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-        # }
+
 
     def clean_reply(self):
         reply = self.cleaned_data['reply']
@@ -48,22 +41,6 @@ class ConfirmCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['is_accept']
-        # widgets = {
-        #     'title': forms.TextInput(attrs={'class': 'form-input'}),
-        #     'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-        # }
 
 
-# class RegisterUserForm(UserCreationForm):
-#     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
-#     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
-#     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-#     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-#
-#     class Meta:
-#         model = User
-#         fields = ('username', 'email', 'password1', 'password2')
 
-# class LoginUserForm(AuthenticationForm):
-#     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
-#     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))

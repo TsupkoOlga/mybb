@@ -3,20 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="654f3c45-9570-4489-a24a-bb54aa8a1331" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/apps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/static/board/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/static/board/images/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/static/board/images/main.ico" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/static/board/images/main.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/templates/board/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/bulletin.html" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/templates/board/bulletin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/templates/board/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/board/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/signals.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/signals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/tasks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/addnew.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mygamebb/board/templates/board/new_comment_email.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/board/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/board/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mygamebb/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mygamebb/mygamebb/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mygamebb/mygamebb/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
