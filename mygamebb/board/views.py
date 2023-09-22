@@ -76,7 +76,7 @@ class AddReply(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddReplyForm
     model = Comment
     template_name = 'board/addreply.html'
-    # success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home')
     login_url = reverse_lazy('login')
     raise_exception = True
 
@@ -100,7 +100,8 @@ class ProfileList(DataMixin, ListView):
     model = Comment
     template_name = 'board/profile.html'
     context_object_name = 'comments'
-    # 0allow_empty = False
+    # allow_empty = False
+
 
     # def get_queryset(self):
     #     return Comment.objects.filter(bulletin__user=self.request.user.id)
@@ -153,8 +154,9 @@ class ShowBulletin(DataMixin, DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title=context['bulletin'])
+        c_def = self.get_user_context(title=context['bulletin'], flag=(self.object.user==self.request.user))
         return dict(list(context.items()) + list(c_def.items()))
+
 
 
 def pageNotFound(request, exception):
@@ -202,4 +204,38 @@ class CommentDelete(DeleteView):
     model = Comment
     template_name = 'board/comment_delete.html'
     success_url = reverse_lazy('profile')
+
+# @login_required
+# def subscribe(request, pk):
+#     user = request.user
+#     category = Category.objects.get(id=pk)
+#     category.subscribers.add(user)
+#
+#     message = 'Вы подписались на рассылку новостей категории'
+#     return render(request, 'news/subscribe.html', {'category': category, 'message': message})
+
+class NewsList(DataMixin, ListView):
+    model = News
+    template_name = 'board/news.html'
+    context_object_name = 'news'
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     c_def = self.get_user_context(title='Категория - ' + str(context['bulletins'][0].cat),
+    #                                   cat_selected=context['bulletins'][0].cat_id)
+    #     return dict(list(context.items()) + list(c_def.items()))
+
+class ShowNew(DataMixin, DetailView):
+    model = News
+    template_name = 'board/new.html'
+    context_object_name = 'new'
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     c_def = self.get_user_context(title=context['bulletin'], flag=(self.object.user==self.request.user))
+    #     return dict(list(context.items()) + list(c_def.items()))
+
+
+
+
 

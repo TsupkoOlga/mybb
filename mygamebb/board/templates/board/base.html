@@ -21,6 +21,8 @@
 {% endfor %}
 				{% if request.user.is_authenticated %}
 				    <li class="last"> {{user.username}} | <a href="/accounts/logout/">Выйти</a></li>
+				    <li class="last"><a href="/accounts/profile/">Профиль</a></li>
+
 				{% else %}
 				    <li class="last"><a href="/accounts/signup/">Регистрация</a> | <a href="/accounts/login/">Войти</a></li>
 				{% endif %}

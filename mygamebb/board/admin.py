@@ -18,7 +18,14 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('reply',)
     list_editable = ('is_accept',)
 
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+    list_display_links = ('id', 'title')
+    search_fields = ('title',)
+
+
 admin.site.register(Bulletin, BulletinAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(News, NewsAdmin)
 

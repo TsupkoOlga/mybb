@@ -71,4 +71,28 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Отклик'
         verbose_name_plural = 'Отклики'
-        ordering = ['id']
+        ordering = ['-id']
+
+class News(models.Model):
+    title = models.CharField(max_length=63, verbose_name='Заголовок')
+    time_in = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    content = models.TextField(verbose_name='Текст новости')
+
+    def __str__(self):
+        return self.title.title()
+
+    def get_absolute_url(self):
+        return reverse('new', args=[str(self.id)])
+
+    def preview(self):
+       if len(self.content) < 125:
+           prw = self.content
+       else:
+           prw = self.content[:124] + '...'
+       return prw
+
+    class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+        ordering = ['-id']
+

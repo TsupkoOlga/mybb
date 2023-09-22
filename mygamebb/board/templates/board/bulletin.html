@@ -8,11 +8,16 @@
     {{bulletin.content|linebreaks}}
 {% endautoescape %}
 
+{% if flag %}
+    <p class="link-read-post"><a href="edit/">Редактировать</a></p>
+{% endif %}
+
 <h3>Отклики</h3>
 {% get_comments filter=bulletin.id as comments %}
 {% for c in comments %}
 	<li class="selected">{{c.reply}}</li>
 {% endfor %}
+
 <p class="link-read-post"><a href="leavereply/">Оставить отклик</a></p>
 
 {% endblock %}
